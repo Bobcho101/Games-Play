@@ -3,6 +3,7 @@ import './Global.css';
 import Header from "./components/header/Header"
 import Home from './components/home/Home';
 import { Route, Routes } from 'react-router';
+import Create from './components/create-game/Create';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Header /> 
             <Routes>
                 <Route path={'/'} element={<Home />} />
+                <Route path={'/create-game'} element={<Create />} />
             </Routes>
         </>
     )
