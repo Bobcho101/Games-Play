@@ -1,7 +1,12 @@
+import './Typography.css';
+import Header from "./components/header/Header"
+import Home from './components/home/Home';
+
 function App() {
     return (
         <>
-        <h1>hi</h1>
+            <Header />  
+            <Home />
         </>
     )
 }
