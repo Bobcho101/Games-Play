@@ -1,4 +1,5 @@
 import './Typography.css';
+import './Global.css';
 import Header from "./components/header/Header"
 import Home from './components/home/Home';
 
