@@ -1,17 +1,15 @@
 import useFetch from "../../hooks/useFetch";
 
 export default function Games() {
-    const [ data ] = useFetch('http://localhost:3030/jsonstore/games');
-
-    console.log(data);
+    const [ games ] = useFetch('http://localhost:3030/jsonstore/games');
     
     return (
         <>
             <section id="catalog-page">
                 <h1>All Games</h1>
                 {/* Display div: with information about every game (if any) */}
-                {data.length > 0 
-                ?    data.map((post) => (<div key={post[0]} className="allGames">
+                {games.length > 0 
+                ?    games.map((post) => (<div key={post[0]} className="allGames">
                         <div className="allGames-info">
                             <img src={post[1].imageUrl} />
                             <h6>{post[1].category}</h6>
