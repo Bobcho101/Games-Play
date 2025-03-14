@@ -7,7 +7,7 @@ export default async function createGame(newGameData){
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({newGameData})
+            body: JSON.stringify(newGameData)
         })
     } catch(err){
         return console.log(err.message);
