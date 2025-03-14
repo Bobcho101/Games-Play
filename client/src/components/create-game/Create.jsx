@@ -1,18 +1,27 @@
+import { useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
 
 export default function Create() {
+    const navigate = useNavigate();
     const [formValues, changeFormValuesHandler, submitFormHandler] = useForm({
         'title': '', 
         'category': '', 
         'maxLevel': '',
         'imageUrl': '',
+        'summary': '',
     });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        submitFormHandler(); 
+        navigate('/games');
+    };
 
 
     return (
         <>
             <section id="create-page" className="auth">
-                <form onSubmit={submitFormHandler} id="create">
+                <form onSubmit={handleSubmit} id="create">
                     <div className="container">
                     <h1>Create Game</h1>
                     <label htmlFor="title">Legendary title:</label>
@@ -53,7 +62,7 @@ export default function Create() {
                         onChange={changeFormValuesHandler}
                     />
                     <label htmlFor="summary">Summary:</label>
-                    <textarea name="summary" id="summary" defaultValue={""} />
+                    <textarea name="summary" id="summary" defaultValue={formValues.summary} onChange={changeFormValuesHandler}  />
                     <input className="btn submit" type="submit" defaultValue="Create Game" />
                     </div>
                 </form>
