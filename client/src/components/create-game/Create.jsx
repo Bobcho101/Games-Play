@@ -1,9 +1,18 @@
+import useForm from "../../hooks/useForm";
+
 export default function Create() {
+    const [formValues, changeFormValuesHandler, submitFormHandler] = useForm({
+        'title': '', 
+        'category': '', 
+        'maxLevel': '',
+        'imageUrl': '',
+    });
+
 
     return (
         <>
             <section id="create-page" className="auth">
-                <form id="create">
+                <form onSubmit={submitFormHandler} id="create">
                     <div className="container">
                     <h1>Create Game</h1>
                     <label htmlFor="title">Legendary title:</label>
@@ -12,6 +21,8 @@ export default function Create() {
                         id="title"
                         name="title"
                         placeholder="Enter game title..."
+                        value={formValues.title}
+                        onChange={changeFormValuesHandler}
                     />
                     <label htmlFor="category">Category:</label>
                     <input
@@ -19,6 +30,8 @@ export default function Create() {
                         id="category"
                         name="category"
                         placeholder="Enter game category..."
+                        value={formValues.category}
+                        onChange={changeFormValuesHandler}
                     />
                     <label htmlFor="maxLevel">MaxLevel:</label>
                     <input
@@ -27,6 +40,8 @@ export default function Create() {
                         name="maxLevel"
                         min={1}
                         placeholder={1}
+                        value={formValues.maxLevel}
+                        onChange={changeFormValuesHandler}
                     />
                     <label htmlFor="imageUrl">Image:</label>
                     <input
@@ -34,6 +49,8 @@ export default function Create() {
                         id="imageUrl"
                         name="imageUrl"
                         placeholder="Upload a photo..."
+                        value={formValues.imageUrl}
+                        onChange={changeFormValuesHandler}
                     />
                     <label htmlFor="summary">Summary:</label>
                     <textarea name="summary" id="summary" defaultValue={""} />
