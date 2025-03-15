@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import useFetch from "../../hooks/useFetch";
 
 export default function Games() {
@@ -14,9 +15,9 @@ export default function Games() {
                             <img src={post[1].imageUrl} />
                             <h6>{post[1].category}</h6>
                             <h2>{post[1].title}</h2>
-                            <a href="#" className="details-button">
+                            <Link to={`/games/${post[0]}`} className="details-button">
                                 Details
-                            </a>
+                            </Link>
                             </div>
                         </div>
                     ))
