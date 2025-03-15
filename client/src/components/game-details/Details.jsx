@@ -6,8 +6,6 @@ export default function Details() {
     const { gameId } = useParams();
     const [ currentGameData ] = useFetch(`http://localhost:3030/jsonstore/games/${gameId}`, true);
   
-    console.log(currentGameData);
-    
     return (
         <>
             <section id="game-details">
