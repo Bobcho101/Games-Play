@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import useFetch from "../../hooks/useFetch";
 
 export default function Home() {
@@ -32,9 +33,9 @@ export default function Home() {
                         <span>☆</span>
                     </div>
                     <div className="data-buttons">
-                        <a href="#" className="btn details-btn">
+                        <Link to={`/games/${post[0]}`} className="btn details-btn">
                         Details
-                        </a>
+                        </Link>
                     </div>
                 </div>) : <p className="no-articles">No games yet</p>}
                 {/* <div className="game">
