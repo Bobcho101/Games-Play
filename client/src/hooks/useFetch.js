@@ -11,7 +11,7 @@ const useFetch = (url, fetchingOneGame = false) => {
             }).catch((err) => {     
                 console.log(err.message);
             })
-    }, [url]);
+    }, [url, fetchingOneGame]);
     
     return [data];
 }

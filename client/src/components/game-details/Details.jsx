@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 export default function Details() {
     const { gameId } = useParams();
     const [ currentGameData ] = useFetch(`http://localhost:3030/jsonstore/games/${gameId}`, true);
+  
     console.log(currentGameData);
     
     return (
@@ -12,17 +13,13 @@ export default function Details() {
                 <h1>Game Details</h1>
                 <div className="info-section">
                     <div className="game-header">
-                    <img className="game-img" src="images/MineCraft.png" />
+                    <img className="game-img" src={currentGameData.imageUrl} alt={currentGameData.title} />
                     <h1>Bright</h1>
-                    <span className="levels">MaxLevel: 4</span>
-                    <p className="type">Action, Crime, Fantasy</p>
+                    <span className="levels">MaxLevel: {currentGameData.maxLevel}</span>
+                    <p className="type">{currentGameData.category}</p>
                     </div>
                     <p className="text">
-                    Set in a world where fantasy creatures live side by side with humans. A
-                    human cop is forced to work with an Orc to find a weapon everyone is
-                    prepared to kill for. Set in a world where fantasy creatures live side by
-                    side with humans. A human cop is forced to work with an Orc to find a
-                    weapon everyone is prepared to kill for.
+                   {currentGameData.summary}
                     </p>
                     {/* Bonus ( for Guests and Users ) */}
                     <div className="details-comments">
