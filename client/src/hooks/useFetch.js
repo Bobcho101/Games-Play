@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url) => {
-    const [data, setData] = useState([]);
+const useFetch = (url, fetchingOneGame = false) => {
+    const [data, setData] = useState(fetchingOneGame ? {} : []);
 
-    useEffect(() => {
+   useEffect(() => {
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                setData(Object.entries(data));
+                setData(fetchingOneGame ? data : Object.entries(data));
             }).catch((err) => {     
                 console.log(err.message);
             })
-    }, [url])
-
+    }, [url]);
+    
     return [data];
 }
-
 export default useFetch;
