@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
+import createGame from "../../utils/gamesUtils";
 
 export default function Create() {
     const navigate = useNavigate();
-    const [formValues, changeFormValuesHandler, submitFormHandler] = useForm({
+    const [formValues, changeFormValuesHandler] = useForm({
         'title': '', 
         'category': '', 
         'maxLevel': '',
@@ -11,9 +12,11 @@ export default function Create() {
         'summary': '',
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        submitFormHandler(); 
+        const formData = Object.fromEntries(new FormData(e.currentTarget));
+
+        await createGame(formData);
         navigate('/games');
     };
 
