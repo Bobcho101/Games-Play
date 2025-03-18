@@ -56,5 +56,4 @@ const useLogin = () => {
 export {
     useLogin,
     useRegister,
-    useLogout,
 }
