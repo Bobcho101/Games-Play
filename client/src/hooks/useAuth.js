@@ -52,8 +52,30 @@ const useLogin = () => {
 }
 
 
+const useLogout = () => {
+    const logout = async (accessToken) => {
+        try {
+            const res = await fetch(`${baseUrl}/logout`, {
+                method: 'GET',
+                headers: {
+                    'X-Authorization': accessToken,
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!res.ok) {
+                throw new Error(`A guest cannot logout!`);
+            }
+            return res;
+        } catch (err) {
+            console.log(err.message);
+            return {error: err.message};
+        } 
+    }
+    return [logout];
+}
 
 export {
     useLogin,
     useRegister,
+    useLogout,
 }

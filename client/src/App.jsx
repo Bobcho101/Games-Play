@@ -8,6 +8,7 @@ import Login from './components/login/Login';
 import Details from "./components/game-details/Details";
 import { useState } from "react";
 import localStorageUtils from "./utils/localStorageUtils";
+import Logout from "./components/logout/logout";
 
 
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path={'/games'} element={<Games />} />
                 <Route path={'/register'} element={<Register />} />
                 <Route path={'/login'} element={<Login setIsUser={setIsUser} />} />
+                <Route path={'/logout'} element={<Logout />} />
                 <Route path={'/games/:gameId'} element={<Details />} />
             </Routes>
         </>

@@ -5,5 +5,11 @@ export default{
     setUserData(response){
         localStorage.setItem('accessToken', response.accessToken);
         localStorage.setItem('email', response.email);
-    }
+    },
+    clearUserData(){
+        localStorage.clear();
+    },
+    getUserAccessToken(){
+        return localStorage.getItem('accessToken');
+    },
 }
