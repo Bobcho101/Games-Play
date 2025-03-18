@@ -11,18 +11,13 @@ export default function Logout({setIsUser}) {
             const accessToken = localStorageUtils.getUserAccessToken();
 
             try {
-                const res = await fetch(`${baseUrl}/logout`, {
+                await fetch(`${baseUrl}/logout`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Authorization': accessToken, 
                     },
                 });
-
-                if (!res.ok) {
-                    throw new Error(`A guest cannot logout!`);
-                }
-                return res;
             } catch (err) {
                 console.log(err.message);
             } 
