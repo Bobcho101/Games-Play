@@ -1,24 +1,35 @@
 import { useNavigate } from "react-router";
 import localStorageUtils from "../../utils/localStorageUtils";
-import { useLogout } from "../../hooks/useAuth";
+const baseUrl = "http://localhost:3030/users";
 
-
-export default function Logout() {
+export default function Logout({setIsUser}) {
     const navigate = useNavigate();
-    const [ logout ] = useLogout();
     const isUser = localStorageUtils.isUser();
 
     const logoutHandler = async () => {
         if(isUser){
             const accessToken = localStorageUtils.getUserAccessToken();
-            const res = await logout(accessToken);
 
-            if(res.error){
-                return alert('A guest cannot logout!')
-            }
+            try {
+                const res = await fetch(`${baseUrl}/logout`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Authorization': accessToken, 
+                    },
+                });
+
+                if (!res.ok) {
+                    throw new Error(`A guest cannot logout!`);
+                }
+                return res;
+            } catch (err) {
+                console.log(err.message);
+            } 
 
             localStorageUtils.clearUserData();
-            navigate('/');
+            setIsUser(false);
+            return navigate('/');
         }
     };
 

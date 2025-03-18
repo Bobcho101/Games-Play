@@ -3,7 +3,7 @@ import useForm from "../../hooks/useForm";
 import { useRegister } from "../../hooks/useAuth";
 import localStorageUtils from "../../utils/localStorageUtils";
 
-export default function Register() {
+export default function Register({setIsUser}) {
     const navigate = useNavigate();
     const [ register ] = useRegister();
     const [formValues, changeFormValues] = useForm({
@@ -25,7 +25,7 @@ export default function Register() {
         }     
         
         localStorageUtils.setUserData(response);
-
+        setIsUser(true);
         return navigate('/');
     }
 
