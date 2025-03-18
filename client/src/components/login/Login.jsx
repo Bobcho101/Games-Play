@@ -15,7 +15,8 @@ export default function Login() {
         e.preventDefault();
         const response = await login(formValues);
         if(response.error){
-            alert('Wrong email or password!')
+            formValues.password = '';
+            return alert('Wrong email or password!');
         }     
         
         localStorageUtils.setUserData(response);
