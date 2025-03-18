@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
 import createGame from "../../utils/gamesUtils";
+import localStorageUtils from "../../utils/localStorageUtils";
 
 export default function Create() {
     const navigate = useNavigate();
@@ -15,9 +16,15 @@ export default function Create() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.currentTarget));
+        const accessToken = localStorageUtils.getUserAccessToken();
+        const result = await createGame(formData, accessToken);
 
-        await createGame(formData);
-        navigate('/games');
+
+        if(result.error){
+            return alert("Game wasn't created! Try again!");
+        }
+
+        return navigate('/games');
     };
 
 
