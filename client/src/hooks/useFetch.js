@@ -45,9 +45,8 @@ const useFetchOneGame = (url) => {
 }
 
 const useCreateGame = (url, newGameData, authToken) => {
-    if(!authToken) return;
-    
     useEffect(() => {
+        if(!authToken) return;
         const controller = new AbortController();
         const signal = controller.signal;
 
@@ -73,4 +72,5 @@ const useCreateGame = (url, newGameData, authToken) => {
 export {
     useFetchAllGames,
     useFetchOneGame,
+    useCreateGame,
 };
