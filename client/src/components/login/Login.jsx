@@ -3,7 +3,7 @@ import useForm from "../../hooks/useForm";
 import { useLogin } from "../../hooks/useAuth";
 import localStorageUtils from "../../utils/localStorageUtils";
 
-export default function Login() {
+export default function Login({ setIsUser }) {
     const navigate = useNavigate();
     const [login] = useLogin();
     const [formValues, changeFormValues] = useForm({
@@ -20,7 +20,7 @@ export default function Login() {
         }     
         
         localStorageUtils.setUserData(response);
-
+        setIsUser(true);
         return navigate('/');
     }
 

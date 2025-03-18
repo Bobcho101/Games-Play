@@ -1,8 +1,13 @@
 import { Link } from 'react-router';
 import localStorageUtils from '../../utils/localStorageUtils';
-export default function Header() {
-    const isUser = localStorageUtils.isUser();
+import { useEffect, useState } from 'react';
+export default function Header({ setIsUser, isUser }) {
+    const [isUserState, setIsUserState] = useState(localStorageUtils.isUser());
 
+    useEffect(() => {
+        setIsUserState(localStorageUtils.isUser());
+    }, [isUser]);
+ 
     return (
         <>
             <header>
@@ -23,8 +28,6 @@ export default function Header() {
                         <Link to={'/register'}>Register</Link>
                     </div>
                     }
-                    
-                    
                 </nav>
             </header>
         </>
