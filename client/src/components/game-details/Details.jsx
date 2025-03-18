@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
-import useFetch from "../../hooks/useFetch";
+import { useFetchOneGame } from "../../hooks/useFetch";
 
 export default function Details() {
     window.scrollTo(0, 0);
     const { gameId } = useParams();
-    const [ currentGameData ] = useFetch(`http://localhost:3030/jsonstore/games/${gameId}`, true);
+    const [ currentGameData ] = useFetchOneGame(`http://localhost:3030/jsonstore/games/${gameId}`, true);
   
     return (
         <>

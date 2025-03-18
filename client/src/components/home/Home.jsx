@@ -1,11 +1,9 @@
 import { Link } from "react-router";
-import useFetch from "../../hooks/useFetch";
+import { useFetchAllGames } from "../../hooks/useFetch";
 
 export default function Home() {
-    const [ games ] = useFetch('http://localhost:3030/jsonstore/games');
+    const [ games ] = useFetchAllGames('http://localhost:3030/data/games?sortBy=_createdOn%20desc');
 
-    const newGames = games.slice().reverse().slice(0, 3);
-    
     
     return (
         <>
@@ -19,7 +17,7 @@ export default function Home() {
                 <h1>Latest Games</h1>
                 {/* Display div: with information about every game (if any) */}
 
-                {newGames.length > 0 ? newGames.map((post) => 
+                {games.length > 0 ? games.map((post) => 
                 <div key={post[0]} className="game">
                     <div className="image-wrap">
                         <img src={post[1].imageUrl} />

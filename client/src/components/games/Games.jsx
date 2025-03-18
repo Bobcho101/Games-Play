@@ -1,8 +1,8 @@
 import { Link } from "react-router";
-import useFetch from "../../hooks/useFetch";
+import { useFetchAllGames } from "../../hooks/useFetch";
 
 export default function Games() {
-    const [ games ] = useFetch('http://localhost:3030/jsonstore/games');
+    const [ games ] = useFetchAllGames('http://localhost:3030/data/games');
     
     return (
         <>
@@ -10,12 +10,12 @@ export default function Games() {
                 <h1>All Games</h1>
                 {/* Display div: with information about every game (if any) */}
                 {games.length > 0 
-                ?    games.map((post) => (<div key={post[0]} className="allGames">
+                ?    games.map((post) => (<div key={post._id} className="allGames">
                         <div className="allGames-info">
-                            <img src={post[1].imageUrl} />
-                            <h6>{post[1].category}</h6>
-                            <h2>{post[1].title}</h2>
-                            <Link to={`/games/${post[0]}`} className="details-button">
+                            <img src={post.imageUrl} />
+                            <h6>{post.category}</h6>
+                            <h2>{post.title}</h2>
+                            <Link to={`/games/${post._id}`} className="details-button">
                                 Details
                             </Link>
                             </div>
