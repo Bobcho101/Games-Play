@@ -22,9 +22,9 @@ function App() {
                 <Route path={'/'} element={<Home />} />
                 <Route path={'/create-game'} element={<Create />} />
                 <Route path={'/games'} element={<Games />} />
-                <Route path={'/register'} element={<Register />} />
+                <Route path={'/register'} element={<Register setIsUser={setIsUser} />} />
                 <Route path={'/login'} element={<Login setIsUser={setIsUser} />} />
-                <Route path={'/logout'} element={<Logout />} />
+                <Route path={'/logout'} element={<Logout setIsUser={setIsUser} />} />
                 <Route path={'/games/:gameId'} element={<Details />} />
             </Routes>
         </>
