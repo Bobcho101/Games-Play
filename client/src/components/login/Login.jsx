@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
 import { useLogin } from "../../hooks/useAuth";
+import localStorageUtils from "../../utils/localStorageUtils";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -17,9 +18,9 @@ export default function Login() {
             alert('Wrong email or password!')
         }     
         
-        localStorage.setItem('accessToken', response.accessToken);
+        localStorageUtils.setUserData(response);
 
-        navigate('/');
+        return navigate('/');
     }
 
     return (
@@ -37,7 +38,7 @@ export default function Login() {
                         placeholder="Sokka@gmail.com"
                         onChange={changeFormValues}
                     />
-                    <label htmlFor="login-pass">Password:</label>
+                    <label htmlFor="login-password">Password:</label>
                     <input type="password" id="login-password" name="password" onChange={changeFormValues} />
                     <input type="submit" className="btn submit" defaultValue="Login" />
                     <p className="field">
