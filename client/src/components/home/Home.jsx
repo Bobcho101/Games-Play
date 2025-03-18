@@ -18,11 +18,11 @@ export default function Home() {
                 {/* Display div: with information about every game (if any) */}
 
                 {games.length > 0 ? games.map((post) => 
-                <div key={post[0]} className="game">
+                <div key={post._id} className="game">
                     <div className="image-wrap">
-                        <img src={post[1].imageUrl} />
+                        <img src={post.imageUrl} />
                     </div>
-                    <h3>{post[1].title}</h3>
+                    <h3>{post.title}</h3>
                     <div className="rating">
                         <span>☆</span>
                         <span>☆</span>
@@ -31,7 +31,7 @@ export default function Home() {
                         <span>☆</span>
                     </div>
                     <div className="data-buttons">
-                        <Link to={`/games/${post[0]}`} className="btn details-btn">
+                        <Link to={`/games/${post._id}`} className="btn details-btn">
                         Details
                         </Link>
                     </div>
