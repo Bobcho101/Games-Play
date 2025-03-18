@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url, fetchingOneGame = false) => {
-    const [data, setData] = useState(fetchingOneGame ? {} : []);
+const useFetchAllGames = (url) => {
+    const [data, setData] = useState([]);
     
    useEffect(() => {
         const controller = new AbortController();
@@ -9,7 +9,7 @@ const useFetch = (url, fetchingOneGame = false) => {
         fetch(url, { signal })
             .then((res) => res.json())
             .then((data) => {
-                setData(fetchingOneGame ? data : Object.entries(data));
+                setData(data);
             }).catch((err) => {     
                 console.log(err.message);
             })
@@ -17,8 +17,38 @@ const useFetch = (url, fetchingOneGame = false) => {
         return () => {  
             controller.abort(); 
         };
-    }, [url, fetchingOneGame]);
+    }, [url]);
     
     return [data];
 }
-export default useFetch;
+
+const useFetchOneGame = (url) => {
+    const [data, setData] = useState({});
+    
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        fetch(url, { signal })
+            .then((res) => res.json())
+            .then((data) => {
+                setData(data);
+            }).catch((err) => {     
+                console.log(err.message);
+            })
+
+        return () => {  
+            controller.abort(); 
+        };
+    }, [url]);
+
+    return [data];
+}
+
+const useCreateGame = (url) => {
+
+}
+
+export {
+    useFetchAllGames,
+    useFetchOneGame,
+};
