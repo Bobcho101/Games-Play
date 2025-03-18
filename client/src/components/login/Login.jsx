@@ -1,15 +1,25 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
+import { useLogin } from "../../hooks/useAuth";
 
 export default function Login() {
+    const navigate = useNavigate();
+    const [login] = useLogin();
     const [formValues, changeFormValues] = useForm({
         'email': '',
         'password': '',
     });
 
-    const formSubmitHandler = (e) => {
+    const formSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log(formValues);
+        const response = await login(formValues);
+        if(response.error){
+            alert('Wrong email or password!')
+        }     
+        
+        localStorage.setItem('accessToken', response.accessToken);
+
+        navigate('/');
     }
 
     return (
