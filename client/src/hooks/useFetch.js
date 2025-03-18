@@ -44,8 +44,30 @@ const useFetchOneGame = (url) => {
     return [data];
 }
 
-const useCreateGame = (url) => {
+const useCreateGame = (url, newGameData, authToken) => {
+    if(!authToken) return;
+    
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
 
+        fetch(url, { 
+            signal,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': authToken,
+            },
+            body: JSON.stringify(newGameData)
+        }).catch((err) => {     
+            console.log(err.message);
+        })
+
+
+        return () => {  
+            controller.abort(); 
+        };
+    }, [url, newGameData, authToken]);
 }
 
 export {
