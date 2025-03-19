@@ -9,7 +9,7 @@ import Details from "./components/game-details/Details";
 import { useState } from "react";
 import localStorageUtils from "./utils/localStorageUtils";
 import Logout from "./components/logout/logout";
-
+import isUserContext from "./context/isUserContext";
 
 
 function App() {
@@ -17,16 +17,19 @@ function App() {
 
     return (
         <>
-        <Header setIsUser={setIsUser} isUser={isUser} /> 
-            <Routes>
-                <Route path={'/'} element={<Home />} />
-                <Route path={'/create-game'} element={<Create />} />
-                <Route path={'/games'} element={<Games />} />
-                <Route path={'/register'} element={<Register setIsUser={setIsUser} />} />
-                <Route path={'/login'} element={<Login setIsUser={setIsUser} />} />
-                <Route path={'/logout'} element={<Logout setIsUser={setIsUser} />} />
-                <Route path={'/games/:gameId'} element={<Details />} />
-            </Routes>
+        <isUserContext.Provider value={{isUser, setIsUser}}>
+        {/* <Header setIsUser={setIsUser} isUser={isUser} />  */}
+            <Header /> 
+                <Routes>
+                    <Route path={'/'} element={<Home />} />
+                    <Route path={'/create-game'} element={<Create />} />
+                    <Route path={'/games'} element={<Games />} />
+                    <Route path={'/register'} element={<Register setIsUser={setIsUser} />} />
+                    <Route path={'/login'} element={<Login setIsUser={setIsUser} />} />
+                    <Route path={'/logout'} element={<Logout setIsUser={setIsUser} />} />
+                    <Route path={'/games/:gameId'} element={<Details />} />
+                </Routes>
+            </isUserContext.Provider>
         </>
     )
 }

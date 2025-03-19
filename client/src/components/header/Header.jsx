@@ -1,12 +1,9 @@
 import { Link } from 'react-router';
-import localStorageUtils from '../../utils/localStorageUtils';
-import { useEffect, useState } from 'react';
-export default function Header({ setIsUser, isUser }) {
-    const [isUserState, setIsUserState] = useState(localStorageUtils.isUser());
+import { useContext } from 'react';
+import isUserContext from '../../context/isUserContext';
+export default function Header() {
+    const {isUser} = useContext(isUserContext);
 
-    useEffect(() => {
-        setIsUserState(localStorageUtils.isUser());
-    }, [isUser]);
  
     return (
         <>
